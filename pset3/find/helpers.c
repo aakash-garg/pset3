@@ -44,16 +44,17 @@ bool search(int value, int values[], int n)
  * Sorts array of n values.
  */
 void sort(int values[], int n)
-{
+{   int temp;
     for (int i = 0; i < n; i++)
     {
-        int element = values[i];
-        int j = i;
-        while (j > 0 && values[i - 1] > element)
+        for (int j = i + 1; j < n; j++)
         {
-            values[j] = values [j - 1];
-            j = j - 1;
-            values[j] =element;
+            if(values[i]>values[j])
+            {
+                temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
+            }
         }
-}
+    }
 }
