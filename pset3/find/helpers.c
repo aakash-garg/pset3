@@ -16,12 +16,26 @@
  */
 bool search(int value, int values[], int n)
 {
-    for (int i = 0; i < n; i++)
+    int start = 0;
+    int end = n - 1; // important (start counting from 0)
+    int mid = (start + end) / 2;
+
+    while (start <= end)
     {
-        if (value == values[i])
+    if (array[mid] == value)
+      return true;
+    else if (value < array[mid])
         {
-            return true;
+          end = mid - 1;
+          mid = (start + end) / 2;
         }
+    else if (value > array[mid])
+        {
+          start = mid + 1;
+          mid = (start + end) / 2;
+        }
+      else 
+        break;
     }
     return false;
 }
@@ -41,4 +55,5 @@ void sort(int values[], int n)
             j = j - 1;
             values[j] =element;
         }
+}
 }
