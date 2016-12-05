@@ -22,14 +22,14 @@ bool search(int value, int values[], int n)
 
     while (start <= end)
     {
-    if (array[mid] == value)
+    if (values[mid] == value)
       return true;
-    else if (value < array[mid])
+    else if (value < values[mid])
         {
           end = mid - 1;
           mid = (start + end) / 2;
         }
-    else if (value > array[mid])
+    else if (value > values[mid])
         {
           start = mid + 1;
           mid = (start + end) / 2;
