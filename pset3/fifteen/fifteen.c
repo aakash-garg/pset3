@@ -202,16 +202,134 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < d; i++) 
+    { 
+        for (int j = 0; j < d; j++) 
+        { 
+        if (board[i][j] == tile) 
+        {
+        if (!check(i,j)) 
+          return false;
+        else 
+        {
+          swap(i,j); // TODO
+          return true;
+        }
+      }
+    }
+  }
+ return false;
 }
 
+bool 
+check(int row, int column)
+{
+  if (row == d-1) 
+  { 
+    if (column == 0) 
+    { 
+      if (board[row-1][column] == 0)
+        return true;
+      else if (board[row][column+1] == 0)
+        return true;
+    }
+    else if (column == d-1) 
+    { 
+      if (board[row-1][column] == 0)
+        return true;
+      else if (board[row][column-1] == 0)
+        return true;
+    }
+    else 
+    { 
+      if (board[row-1][column] == 0)
+        return true;
+      else if (board[row][column-1] == 0)
+        return true;
+      else if (board[row][column+1] == 0)
+        return true;
+    }
+  }
+  else if (row == 0) 
+  { 
+    if (column == 0) 
+    { 
+      if (board[row][column+1] == 0)
+        return true;
+      else if (board[row+1][column] == 0)
+        return true;
+    }
+    else if (column == d-1) 
+    {
+      if (board[row][column-1] == 0)
+        return true;
+      else if (board[row+1][column] == 0)
+        return true;
+    }
+    else
+    { 
+      if (board[row+1][column] == 0)
+        return true;
+      else if (board[row][column+1] == 0)
+        return true;
+      else if (board[row][column-1] == 0)
+        return true;
+    }
+  }
+  else if (column == 0) 
+  {
+    if (board[row-1][column] == 0) 
+      return true;
+    else if (board[row+1][column] == 0) 
+           return true;
+    else if (board[row][column+1] == 0)
+      return true;
+  }
+  else if (column == d-1) 
+  { 
+    if (board[row-1][column] == 0) 
+      return true;
+    else if (board[row+1][column] == 0)
+           return true;
+    else if (board[row][column-1] == 0)
+      return true;
+  }
+   else
+    {
+      if (board[row+1][column] == 0)
+        return true;
+      else if (board[row-1][column] == 0)
+        return true;
+      else if (board[row][column+1] == 0)
+        return true;
+      else if (board[row][column-1] == 0)
+        return true;
+    }
+  
+  return false;
+}
 /**
  * Returns true if game is won (i.e., board is in winning configuration), 
  * else false.
  */
 bool won(void)
 {
-    // TODO
+    int end = d * d - 1;
+    int check = 1;
+    for (int i = 0; i < d; i++) 
+    {
+    for (int j = 0; j < d; j++) 
+    {
+      if (board[i][j] == check && check <= end) 
+      {
+        check = check + 1;
+        continue;
+      }
+      else if (check > end)
+        return true;
+      else
+        break;
+    }
+  }
     return false;
 }
