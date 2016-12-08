@@ -159,7 +159,20 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    int temp, i, j;
+    temp = d * d;
+    for(i = 0; i < d; i++)
+    {
+        for(j = 0; j < d; j++)
+        {
+            board[i][j] = --temp;
+        }
+    }
+    if(d % 2 == 0)
+    {
+        board[d-1][d-2] = 2;
+        board[d-1][d-3] = 1;
+    }
 }
 
 /**
@@ -167,7 +180,15 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+    int i, j;
+    for(i=0;i<d;i++)
+    {
+        for(j=0;j<d;j++)
+        {
+            printf("%d ", board[i][j]);
+        }
+        printf("\n\n");
+    }
 }
 
 /**
@@ -176,9 +197,9 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
     return false;
 }
+
 
 /**
  * Returns true if game is won (i.e., board is in winning configuration), 
