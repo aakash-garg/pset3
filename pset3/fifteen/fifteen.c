@@ -185,7 +185,7 @@ void draw(void)
     {
         for(j=0;j<d;j++)
         {
-            printf("%d ", board[i][j]);
+            printf("%d", board[i][j]);
         }
         printf("\n\n");
     }
@@ -197,8 +197,53 @@ void draw(void)
  */
 bool move(int tile)
 {
+    if (tile > d * d - 1 || tile < 1) 
+    {
+        return false;
+    }
+    
+    int row, column;
+    
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == tile)
+            {
+                row = i;
+                column = j;
+            }
+        }
+    }
+
+    if (row - 1 >= 0 && board[row - 1][column] == 0)
+    {
+        board[row - 1][column] = board[row][column];
+        board[row][column] = 0;
+        return true;
+    }
+    else if (row + 1 < d && board[row + 1][column] == 0)
+    {
+        board[row + 1][column] = board[row][column];
+        board[row][column] = 0;
+        return true;
+    }
+    else if (column - 1 >= 0 && board[row][column - 1] == 0)
+    {
+        board[row][column - 1] = board[row][column];
+        board[row][column] = 0;
+        return true;
+    }
+    else if (column + 1 < d && board[row][column + 1] == 0)
+    {
+        board[row][column + 1] = board[row][column];
+        board[row][column] = 0;
+        return true;
+    }
+    
     return false;
 }
+
 
 
 /**
@@ -207,6 +252,17 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    int counter = 0;
+    
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (++counter!=(d*d) && board[i][j]!=counter)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
